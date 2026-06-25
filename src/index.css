@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #eef7ef;
+  font-family: Inter, sans-serif;
+}
+
+.dark-mode .home-page,
+.dark-mode .history-page,
+.dark-mode .tips-page,
+.dark-mode .upload-page,
+.dark-mode .result-page,
+.dark-mode .details-page,
+.dark-mode .profile-page,
+.dark-mode .about-page{
+  background:#111827 !important;
+}
+
+.dark-mode .home-card,
+.dark-mode .history-card,
+.dark-mode .tips-card,
+.dark-mode .upload-card,
+.dark-mode .result-card,
+.dark-mode .details-card,
+.dark-mode .profile-card,
+.dark-mode .about-card{
+  background:#111827;
+}
+
+.dark-mode .analysis-item,
+.dark-mode .setting-item,
+.dark-mode .tip-item,
+.dark-mode .history-item,
+.dark-mode .about-box,
+.dark-mode .notification-modal,
+.dark-mode .bottom-nav{
+  background:#1F2937;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode span{
+  color:white;
+}
+
+.dark-mode p,
+.dark-mode small{
+  color:#CBD5E1;
+}
+
+.dark-mode .analyze-card,
+.dark-mode .hero-tip,
+.dark-mode .user-card{
+  background:#1E3A2F;
+}
+
+.dark-mode svg{
+  color:white;
+}

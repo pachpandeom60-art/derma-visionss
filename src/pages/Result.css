@@ -1,0 +1,205 @@
+.result-page{
+  min-height:100vh;
+  background:#EEF7EF;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+}
+
+.result-card{
+  width:100%;
+  max-width:430px;
+
+  min-height:100vh;
+
+  padding:30px 25px 40px;
+
+  position:relative;
+}
+
+.back-icon{
+  font-size:28px;
+  color:#1F2B46;
+  cursor:pointer;
+
+  margin-bottom:20px;
+}
+
+.result-title{
+  text-align:center;
+
+  color:#1F2B46;
+
+  font-size:42px;
+  font-weight:700;
+
+  margin-bottom:35px;
+}
+
+.prediction-card{
+  background:#D8F6DA;
+
+  border-radius:20px;
+
+  padding:35px 20px;
+
+  text-align:center;
+
+  box-shadow:0 10px 24px rgba(0,0,0,0.08);
+}
+
+.prediction-label{
+  color:#000;
+  font-size:16px;
+
+  margin-bottom:15px;
+}
+
+.disease-name{
+  color:#20B04B;
+
+  font-size:40px;
+  font-weight:700;
+
+  margin-bottom:25px;
+}
+
+.score-label,
+.severity-label{
+  color:#000;
+
+  margin-top:10px;
+}
+
+.confidence-score{
+  color:#20B04B;
+
+  font-size:42px;
+  font-weight:700;
+
+  margin-top:10px;
+}
+
+.severity-badge{
+  width:120px;
+
+  margin:15px auto 0;
+
+  background:#20B04B;
+  color:white;
+
+  padding:12px;
+
+  border-radius:12px;
+
+  font-weight:600;
+
+  box-shadow:0 8px 18px rgba(32,176,75,0.3);
+}
+
+.distribution-title{
+  margin-top:35px;
+  margin-bottom:20px;
+
+  color:#1F2B46;
+}
+
+.probability-item{
+  display:flex;
+  justify-content:space-between;
+
+  margin-top:16px;
+
+  color:#1F2B46;
+}
+
+.progress-bar{
+  width:100%;
+  height:12px;
+
+  background:white;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  margin-top:8px;
+}
+
+.progress-fill{
+  height:100%;
+
+  border-radius:20px;
+}
+
+.melanoma{
+  width:89%;
+  background:#20B04B;
+}
+
+.moles{
+  width:7%;
+  background:#79C88E;
+}
+
+.keratosis{
+  width:4%;
+  background:#B8E8C1;
+}
+
+.result-buttons{
+  display:flex;
+  gap:15px;
+
+  margin-top:40px;
+}
+
+.details-btn,
+.save-btn{
+  flex:1;
+
+  border:none;
+
+  background:#20B04B;
+  color:white;
+
+  height:55px;
+
+  border-radius:14px;
+
+  cursor:pointer;
+
+  font-size:16px;
+  font-weight:600;
+
+  box-shadow:0 10px 24px rgba(32,176,75,0.3);
+}
+
+@media (min-width:768px){
+
+  .result-card{
+    max-width:900px;
+  }
+
+  .prediction-card{
+    max-width:500px;
+    margin:auto;
+  }
+
+  .distribution-title{
+    text-align:center;
+  }
+
+  .probability-section{
+    max-width:600px;
+    margin:auto;
+  }
+
+  .result-buttons{
+    max-width:500px;
+    margin:40px auto 0;
+  }
+}
