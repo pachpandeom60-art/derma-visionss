@@ -1,5 +1,6 @@
 import "./Upload.css";
 import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import { FiUploadCloud } from "react-icons/fi";
 import { FiCamera } from "react-icons/fi";
@@ -7,6 +8,36 @@ import { FiImage } from "react-icons/fi";
 
 function Upload() {
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    setLoading(true);
+    try {
+      const response = await fetch("http://localhost:5000/predict", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      setLoading(false);
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
+      navigate("/result", { state: { prediction: data, image: URL.createObjectURL(file) } });
+    } catch (err) {
+      console.error(err);
+      alert("Error connecting to backend");
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="upload-page">
 
@@ -32,12 +63,20 @@ function Upload() {
 
           <span>OR</span>
 
+          <input 
+            type="file" 
+            accept="image/*" 
+            style={{ display: "none" }} 
+            ref={fileInputRef} 
+            onChange={handleFileChange} 
+          />
           <button
-  className="choose-btn"
-  onClick={() => navigate("/result")}
->
-  Choose Image
-</button>
+            className="choose-btn"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={loading}
+          >
+            {loading ? "Analyzing..." : "Choose Image"}
+          </button>
 
         </div>
 
@@ -54,7 +93,7 @@ function Upload() {
               <span>Camera</span>
             </button>
 
-            <button className="capture-btn">
+            <button className="capture-btn" onClick={() => fileInputRef.current?.click()}>
               <FiImage />
               <span>Gallery</span>
             </button>

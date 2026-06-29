@@ -1,10 +1,23 @@
 import "./Result.css";
 import { FiArrowLeft } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import DiseaseDetails from "./DiseaseDetails";
 
 function Result() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { prediction, image } = location.state || {};
+
+  if (!prediction) {
+    return (
+      <div className="result-page">
+        <div className="result-card">
+          <h2>No result data found. Please upload an image first.</h2>
+          <button onClick={() => navigate("/upload")} className="details-btn" style={{marginTop: '20px'}}>Go to Upload</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="result-page">
@@ -26,7 +39,7 @@ function Result() {
           </p>
 
           <h2 className="disease-name">
-            Melanoma
+            {prediction.predicted_class}
           </h2>
 
           <p className="score-label">
@@ -34,7 +47,7 @@ function Result() {
           </p>
 
           <h3 className="confidence-score">
-            89.4%
+            {(prediction.confidence * 100).toFixed(1)}%
           </h3>
 
           <p className="severity-label">
@@ -42,7 +55,7 @@ function Result() {
           </p>
 
           <div className="severity-badge">
-            High
+            {prediction.severity || "Unknown"}
           </div>
 
         </div>
@@ -52,40 +65,20 @@ function Result() {
         </h3>
 
         <div className="probability-section">
-
-          <div className="probability-item">
-            <span>Melanoma</span>
-            <span>89%</span>
-          </div>
-
-          <div className="progress-bar">
-            <div
-              className="progress-fill melanoma"
-            ></div>
-          </div>
-
-          <div className="probability-item">
-            <span>Moles</span>
-            <span>7%</span>
-          </div>
-
-          <div className="progress-bar">
-            <div
-              className="progress-fill moles"
-            ></div>
-          </div>
-
-          <div className="probability-item">
-            <span>Benign Keratosis</span>
-            <span>4%</span>
-          </div>
-
-          <div className="progress-bar">
-            <div
-              className="progress-fill keratosis"
-            ></div>
-          </div>
-
+          {prediction.probabilities?.map((item, index) => (
+            <div key={index}>
+              <div className="probability-item">
+                <span>{item.class}</span>
+                <span>{Math.round(item.prob * 100)}%</span>
+              </div>
+              <div className="progress-bar">
+                <div
+                  className="progress-fill"
+                  style={{ width: `${Math.round(item.prob * 100)}%`, backgroundColor: index === 0 ? '#ff4757' : '#ffa502' }}
+                ></div>
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="result-buttons">
