@@ -20,7 +20,7 @@ function Upload() {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/predict", {
+      const response = await fetchfetch("https://derma-visionss.onrender.com/predict", {
         method: "POST",
         body: formData,
       });
@@ -45,9 +45,9 @@ function Upload() {
 
         <div className="upload-header">
           <FiArrowLeft
-  className="back-icon"
-  onClick={() => navigate("/home")}
-/>
+            className="back-icon"
+            onClick={() => navigate("/home")}
+          />
 
           <div>
             <h1>Upload Image</h1>
@@ -63,12 +63,12 @@ function Upload() {
 
           <span>OR</span>
 
-          <input 
-            type="file" 
-            accept="image/*" 
-            style={{ display: "none" }} 
-            ref={fileInputRef} 
-            onChange={handleFileChange} 
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            ref={fileInputRef}
+            onChange={handleFileChange}
           />
           <button
             className="choose-btn"
