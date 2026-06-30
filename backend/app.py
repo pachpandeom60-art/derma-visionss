@@ -11,7 +11,7 @@ try:
 except ImportError:
     print("TensorFlow not installed. Running in mock mode.")
 
-app = Flask(__name__)
+
 CORS(app)
 
 MODEL_PATH = '../skin_b3_62percent.keras'
@@ -31,8 +31,17 @@ if tf_available:
     except Exception as e:
         print(f"Error loading model: {e}")
 
+# Health check route
+@app.route('/')
+def home():
+    return jsonify({
+        "status": "Backend is running",
+        "endpoint": "/predict"
+    })
+
 @app.route('/predict', methods=['POST'])
 def predict():
+
     if 'image' not in request.files:
         return jsonify({"error": "No image provided."}), 400
 
